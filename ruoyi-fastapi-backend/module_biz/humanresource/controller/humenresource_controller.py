@@ -21,27 +21,38 @@ from utils.log_util import logger
 from utils.response_util import ResponseUtil
 
 
-humenresource_controller = APIRouterPro(
+human_resource_controller = APIRouterPro(
     prefix='/human/human_resource', order_num=50, tags=['业务人员信息'], dependencies=[PreAuthDependency()]
 )
 
 
-@humenresource_controller.get(
+@human_resource_controller.get(
     '/list',
     summary='获取业务人员信息分页列表接口',
     description='用于获取业务人员信息分页列表',
     response_model=PageResponseModel[HumenresourceRowModel],
     dependencies=[UserInterfaceAuthDependency('human:human_resource:list')],
 )
-async def get_humanresource_humenresource_list(
+async def get_human_resource_list(
         request: Request,
         human_resource_page_query: Annotated[HumenresourcePageQueryModel, Query()],
         query_db: Annotated[AsyncSession, DBSessionDependency()],
 ) -> Response:
+
+    logger.debug('开始获取业务人员信息列表')
+    logger.debug('-----------------------------------')
+    logger.debug('-----------------------------------')
+    logger.debug('-----------------------------------')
+
+    logger.info(human_resource_page_query)
     # 获取分页数据
     human_resource_page_query_result = \
         await HumenresourceService.get_humenresource_list_services(query_db, human_resource_page_query, is_page=True)
     logger.info('获取成功')
+    logger.debug('-----------------------------------')
+    logger.debug('-----------------------------------')
+    logger.debug('-----------------------------------')
+
 
     return ResponseUtil.success(model_content=human_resource_page_query_result)
 
