@@ -14,6 +14,8 @@ if DataBaseConfig.db_type == 'postgresql':
         f'postgresql+asyncpg://{DataBaseConfig.db_username}:{quote_plus(DataBaseConfig.db_password)}@'
         f'{DataBaseConfig.db_host}:{DataBaseConfig.db_port}/{DataBaseConfig.db_database}'
     )
+# 处理alembic 连接转义字符，
+ASYNC_SQLALCHEMY_DATABASE_URL_ALEMIC = ASYNC_SQLALCHEMY_DATABASE_URL.replace('%', '%%')
 
 async_engine = create_async_engine(
     ASYNC_SQLALCHEMY_DATABASE_URL,

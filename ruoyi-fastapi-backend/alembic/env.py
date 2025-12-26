@@ -11,7 +11,7 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from config.database import ASYNC_SQLALCHEMY_DATABASE_URL, Base
+from config.database import ASYNC_SQLALCHEMY_DATABASE_URL_ALEMIC, Base
 from utils.import_util import ImportUtil
 
 # 判断vesrions目录是否存在，如果不存在则创建
@@ -37,7 +37,7 @@ if alembic_config.config_file_name is not None:
 target_metadata = Base.metadata
 # ASYNC_SQLALCHEMY_DATABASE_URL = 'mysql+asyncmy://root:mysqlroot@127.0.0.1:3306/ruoyi-fastapi'
 # other values from the config, defined by the needs of env.py,
-alembic_config.set_main_option('sqlalchemy.url', ASYNC_SQLALCHEMY_DATABASE_URL)
+alembic_config.set_main_option('sqlalchemy.url', ASYNC_SQLALCHEMY_DATABASE_URL_ALEMIC)
 
 
 def run_migrations_offline() -> None:
