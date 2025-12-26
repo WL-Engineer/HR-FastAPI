@@ -57,6 +57,7 @@ async def get_human_resource_list(
     return ResponseUtil.success(model_content=human_resource_page_query_result)
 
 #
+
 # @humenresource_controller.post(
 #     '',
 #     summary='新增业务人员信息接口',
