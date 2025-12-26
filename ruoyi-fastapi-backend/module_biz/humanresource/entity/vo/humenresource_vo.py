@@ -88,7 +88,7 @@ class humendetailModel(BaseModel):
 
 
 
-class HumenresourceQueryModel(HumenresourceModel):
+class HumenresourceQueryModel(HumenresourceRowModel):
     """
     业务人员信息不分页查询模型
     """
