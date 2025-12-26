@@ -766,3 +766,45 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+
+
+------------------
+-- 1、业务人员表--
+------------------
+-- ----------------------------
+-- 3、业务人员信息表
+-- ----------------------------
+DROP TABLE IF EXISTS biz_staff_info;
+CREATE TABLE biz_staff_info (
+  staff_id           bigint(20)      NOT NULL AUTO_INCREMENT COMMENT '人员ID',
+  dept_id            bigint(20)      DEFAULT NULL COMMENT '部门ID',
+  staff_name         varchar(100)    NOT NULL COMMENT '人员姓名',
+  oa_account         varchar(50)     NOT NULL COMMENT '人员OA账号',
+  employee_code      varchar(50)     NOT NULL COMMENT '人员员工编码',
+  mobile_phone       varchar(11)     DEFAULT NULL COMMENT '移动电话',
+  company_email      varchar(50)     DEFAULT NULL COMMENT '公司邮箱',
+  political_status   varchar(50)     DEFAULT NULL COMMENT '政治面貌',
+  birth_date         date            DEFAULT NULL COMMENT '出生日期',
+  native_place       varchar(100)    DEFAULT NULL COMMENT '籍贯',
+  marital_status     char(1)         DEFAULT '0' COMMENT '婚姻状况（0未婚 1已婚 2离异 3丧偶 9其他）',
+  place_of_birth     varchar(100)    DEFAULT NULL COMMENT '出生地',
+  household_type     varchar(50)     DEFAULT NULL COMMENT '户口类型（如：农业户口、非农业户口等）',
+  household_address  varchar(255)    DEFAULT NULL COMMENT '户口所在地',
+  ethnicity          varchar(50)     DEFAULT NULL COMMENT '民族',
+  create_by          varchar(64)     DEFAULT '' COMMENT '创建者',
+  create_time        datetime        DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  update_by          varchar(64)     DEFAULT '' COMMENT '更新者',
+  update_time        datetime        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  remark             varchar(500)    DEFAULT NULL COMMENT '备注',
+  del_flag           char(1)         DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  PRIMARY KEY (staff_id)
+) ENGINE=InnoDB AUTO_INCREMENT=100 COMMENT='业务人员信息表';
+
+-- ----------------------------
+-- 初始化-业务人员信息表数据
+-- ----------------------------
+INSERT INTO biz_staff_info (staff_id, dept_id, staff_name, oa_account, employee_code, mobile_phone, company_email, political_status, birth_date, native_place, marital_status, place_of_birth, household_type, household_address, ethnicity, create_by, update_by)
+VALUES
+(1, 101, '张三', 'zhangsan', 'EMP001', '13800000001', 'zhangsan@company.com', '中共党员', '1990-01-01', '北京市', '0', '北京市', '非农业户口', '北京市朝阳区', '汉族', 'admin', ''),
+(2, 102, '李四', 'lisi', 'EMP002', '13800000002', 'lisi@company.com', '共青团员', '1992-02-02', '上海市', '1', '上海市', '农业户口', '上海市浦东新区', '回族', 'admin', '');
