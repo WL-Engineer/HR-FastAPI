@@ -43,7 +43,8 @@ class LoggerInitializer:
         )
         _logger.remove()
         # 移除后重新添加sys.stderr, 目的: 控制台输出与文件日志内容和结构一致
-        _logger.add(sys.stderr, filter=self.__filter, format=format_str, enqueue=True)
+        _logger.add(sys.stderr, filter=self.__filter, level='DEBUG', format=format_str, enqueue=True)
+        # _logger.add(sys.stderr, filter=self.__filter, level='INFO', format=format_str, enqueue=True)
         _logger.add(
             self.log_path_error,
             filter=self.__filter,
