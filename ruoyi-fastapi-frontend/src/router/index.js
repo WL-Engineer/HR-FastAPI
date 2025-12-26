@@ -64,7 +64,7 @@ export const constantRoutes = [
     children: [
       {
         path: '/index',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/dashboard/new-home'),  // 修改为新首页
         name: 'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
       }
