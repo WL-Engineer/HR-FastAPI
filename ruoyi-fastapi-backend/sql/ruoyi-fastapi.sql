@@ -23,17 +23,10 @@ create table sys_dept (
 -- ----------------------------
 -- 初始化-部门表数据
 -- ----------------------------
-insert into sys_dept values(100,  0,   '0',          '集团总公司',   0, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(101,  100, '0,100',      '深圳分公司', 1, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(102,  100, '0,100',      '长沙分公司', 2, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(103,  101, '0,100,101',  '研发部门',   1, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(104,  101, '0,100,101',  '市场部门',   2, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(105,  101, '0,100,101',  '测试部门',   3, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(106,  101, '0,100,101',  '财务部门',   4, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(107,  101, '0,100,101',  '运维部门',   5, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(108,  102, '0,100,102',  '市场部门',   1, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-insert into sys_dept values(109,  102, '0,100,102',  '财务部门',   2, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
-
+insert into sys_dept values(100,  0,   '0',              '集团总公司',   0, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
+insert into sys_dept values(101,  100, '0,100',          '陕西分公司',   1, '领导', '15888888888', 'leader@qq.com',    '0', '0', 'admin', sysdate(), 'admin', null);
+insert into sys_dept values(103,  101, '0,100,101',      '研发部门',     1, '年糕', '15888888888', 'niangao@qq.com', '0', '0', 'admin', sysdate(), '', null);
+insert into sys_dept values(200,  101, '0,100,101',      '西安分公司',   1, '张大宝', '18888888888', 'zhang@qq.com', '0', '0', 'admin', sysdate(), 'admin', null);
 
 -- ----------------------------
 -- 2、用户信息表
@@ -68,7 +61,7 @@ create table sys_user (
 -- ----------------------------
 insert into sys_user values(1,  103, 'admin',   '超级管理员', '00', 'niangao@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), sysdate(), 'admin', sysdate(), '', null, '管理员');
 insert into sys_user values(2,  105, 'niangao', '年糕', 			'00', 'niangao@qq.com',  '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), sysdate(), 'admin', sysdate(), '', null, '测试员');
-
+insert into sys_user values(102, 200, 'zhangdabao', '张大宝',     '00', '',                  '',            '0', '', '$2b$12$YOOcm7BXOliHhF/jc5Qrk.iF7Pke6ny1A/qW2Qz1WIsbMBt2oCUH2', '0', '0', '',           sysdate(), sysdate(), 'admin', sysdate(), 'zhangdabao', sysdate(), null);
 
 -- ----------------------------
 -- 3、岗位信息表
@@ -125,7 +118,7 @@ create table sys_role (
 -- ----------------------------
 insert into sys_role values('1', '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'admin', sysdate(), '', null, '超级管理员');
 insert into sys_role values('2', '普通角色',    'common', 2, 2, 1, 1, '0', '0', 'admin', sysdate(), '', null, '普通角色');
-
+insert into sys_role values(100, '人力管理员', 'hrmanager',  1, '1', 1, 1, '0', '0', 'admin', sysdate(), 'admin', null, null);
 
 -- ----------------------------
 -- 5、菜单权限表
@@ -274,8 +267,8 @@ create table sys_user_role (
 -- ----------------------------
 -- 初始化-用户和角色关联表数据
 -- ----------------------------
-insert into sys_user_role values ('1', '1');
-insert into sys_user_role values ('2', '2');
+insert into sys_user_role values (1, 1);
+insert into sys_user_role values (102, 100);
 
 
 -- ----------------------------
@@ -377,6 +370,65 @@ insert into sys_role_menu values ('2', '1058');
 insert into sys_role_menu values ('2', '1059');
 insert into sys_role_menu values ('2', '1060');
 
+-- 角色ID=100（人力管理员）拥有的菜单权限
+insert into sys_role_menu values ('100', '1');
+insert into sys_role_menu values ('100', '100');
+insert into sys_role_menu values ('100', '101');
+insert into sys_role_menu values ('100', '102');
+insert into sys_role_menu values ('100', '103');
+insert into sys_role_menu values ('100', '104');
+insert into sys_role_menu values ('100', '105');
+insert into sys_role_menu values ('100', '106');
+insert into sys_role_menu values ('100', '107');
+insert into sys_role_menu values ('100', '108');
+insert into sys_role_menu values ('100', '500');
+insert into sys_role_menu values ('100', '501');
+insert into sys_role_menu values ('100', '1000');
+insert into sys_role_menu values ('100', '1001');
+insert into sys_role_menu values ('100', '1002');
+insert into sys_role_menu values ('100', '1003');
+insert into sys_role_menu values ('100', '1004');
+insert into sys_role_menu values ('100', '1005');
+insert into sys_role_menu values ('100', '1006');
+insert into sys_role_menu values ('100', '1007');
+insert into sys_role_menu values ('100', '1008');
+insert into sys_role_menu values ('100', '1009');
+insert into sys_role_menu values ('100', '1010');
+insert into sys_role_menu values ('100', '1011');
+insert into sys_role_menu values ('100', '1012');
+insert into sys_role_menu values ('100', '1013');
+insert into sys_role_menu values ('100', '1014');
+insert into sys_role_menu values ('100', '1015');
+insert into sys_role_menu values ('100', '1016');
+insert into sys_role_menu values ('100', '1017');
+insert into sys_role_menu values ('100', '1018');
+insert into sys_role_menu values ('100', '1019');
+insert into sys_role_menu values ('100', '1020');
+insert into sys_role_menu values ('100', '1021');
+insert into sys_role_menu values ('100', '1022');
+insert into sys_role_menu values ('100', '1023');
+insert into sys_role_menu values ('100', '1024');
+insert into sys_role_menu values ('100', '1025');
+insert into sys_role_menu values ('100', '1026');
+insert into sys_role_menu values ('100', '1027');
+insert into sys_role_menu values ('100', '1028');
+insert into sys_role_menu values ('100', '1029');
+insert into sys_role_menu values ('100', '1030');
+insert into sys_role_menu values ('100', '1031');
+insert into sys_role_menu values ('100', '1032');
+insert into sys_role_menu values ('100', '1033');
+insert into sys_role_menu values ('100', '1034');
+insert into sys_role_menu values ('100', '1035');
+insert into sys_role_menu values ('100', '1036');
+insert into sys_role_menu values ('100', '1037');
+insert into sys_role_menu values ('100', '1038');
+insert into sys_role_menu values ('100', '1039');
+insert into sys_role_menu values ('100', '1040');
+insert into sys_role_menu values ('100', '1041');
+insert into sys_role_menu values ('100', '1042');
+insert into sys_role_menu values ('100', '1043');
+insert into sys_role_menu values ('100', '1044');
+insert into sys_role_menu values ('100', '1045');
 -- ----------------------------
 -- 8、角色和部门关联表  角色1-N部门
 -- ----------------------------
@@ -410,7 +462,7 @@ create table sys_user_post
 -- 初始化-用户与岗位关联表数据
 -- ----------------------------
 insert into sys_user_post values ('1', '1');
-insert into sys_user_post values ('2', '2');
+
 
 
 -- ----------------------------
@@ -650,8 +702,8 @@ create table sys_notice (
 -- ----------------------------
 -- 初始化-公告信息表数据
 -- ----------------------------
-insert into sys_notice values('1', '温馨提醒：2018-07-01 vfadmin新版本发布啦', '2', '新版本内容', '0', 'admin', sysdate(), '', null, '管理员');
-insert into sys_notice values('2', '维护通知：2018-07-01 vfadmin系统凌晨维护', '1', '维护内容',   '0', 'admin', sysdate(), '', null, '管理员');
+insert into sys_notice values('1', '温馨提醒：2025-12-26 人力职级新版本发布啦', '2', '新版本内容', '0', 'admin', sysdate(), '', null, '管理员');
+
 
 
 -- ----------------------------
