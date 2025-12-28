@@ -39,19 +39,15 @@ async def get_human_resource_list(
         query_db: Annotated[AsyncSession, DBSessionDependency()],
 ) -> Response:
 
-    logger.debug('开始获取业务人员信息列表')
-    logger.debug('-----------------------------------')
-    logger.debug('-----------------------------------')
+
     logger.debug('-----------------------------------')
 
-    logger.info(human_resource_page_query)
+    logger.debug(human_resource_page_query)
     # 获取分页数据
     human_resource_page_query_result = \
         await HumenresourceService.get_humenresource_list_services(query_db, human_resource_page_query, is_page=True)
     logger.info('获取成功')
-    logger.debug('-----------------------------------')
-    logger.debug('-----------------------------------')
-    logger.debug('-----------------------------------')
+
 
 
     return ResponseUtil.success(model_content=human_resource_page_query_result)
